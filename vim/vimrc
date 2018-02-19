@@ -88,6 +88,7 @@ function! FT_sysverilog()
             \<CR>//          \|
             \<CR>//         \\|/
             \<CR>//          v
+    iabbr ac always_comb
 endfunction
 
 function! FT_vhdl()
