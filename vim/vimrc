@@ -1,0 +1,149 @@
+" General configuration
+" set nocompatible
+let mapleader = ","
+syntax on
+set wildmenu
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set hlsearch
+set nowrap
+set number 
+set ignorecase
+set ssop-=options " don't store global or local values in a session
+set ssop-=folds " don't store folds
+filetype plugin on
+filetype indent on
+
+set noruler
+set laststatus=2
+set statusline=%t                                         " Tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'},%{&ff}]    " file encoding and format
+set statusline+=%h%m%r%y                                  " File flags (help, modified,ro,ftype)
+set statusline+=%=                                        " Left/right separator
+set statusline+=%c,%l/%L                                  " Column, line and total number of lines
+
+" Pathogen activation
+"execute pathogen#infect()
+" Syntastic CFG
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list  = 1
+"let g:syntastic_auto_loc_list             = 1
+"let g:syntastic_check_on_open             = 1
+"let g:syntastic_check_on_wq               = 0
+
+" GUI and graphical stuff
+if has("win32")
+  set background=dark
+  colorscheme lucius
+endif
+set guifont=Courier\ New:h10
+set go-=T
+set go-=m
+
+" Mappings and abbr
+nnoremap ,date :%s/_date_/<C-R>=strftime("%d\\/%m\\/%y")<CR>/g<CR>
+iabbr dts_ <C-R>=strftime("%d/%m/%y")<CR>
+
+" Configurations particularized
+if has("autocmd")
+    " filetype plugin indent on
+    " filetype dependent settings
+    au Filetype vhdl call FT_vhdl()
+    au Filetype python call FT_python()
+    au Filetype ucf call FT_ucf()
+    au Filetype systemverilog call FT_sysverilog()
+else
+    set autoindent
+endif
+
+function! FT_python()
+    set tabstop=4
+    set shiftwidth=4
+    set expandtab
+"    nmap <silent> ;c :.s/^./#&/g<CR>
+    iabbr ewip #           ^
+            \<CR>#          /\|\
+            \<CR>#           \|
+            \<CR>#  END WIP  \|         
+    iabbr wip #  WIP      \|
+            \<CR>#           \|
+            \<CR>#          \\|/
+            \<CR>#           v
+endfunction
+
+function! FT_sysverilog()
+    set tabstop=2
+    set shiftwidth=2
+    set expandtab
+    nnoremap ,vmod i<C-R>=expand("%:t:r")<CR><Esc>bdiw:-1read $HOME/vimfiles/code_templates/sv_module.sv<CR>:%s/module_name_/<C-R>"/g<CR>:%s/_date_/<C-R>=strftime("%d\\/%m\\/%y")<CR>/g<CR>1G/module<CR>
+    iabbr ewip //          ^
+            \<CR>//         /\|\
+            \<CR>//          \|
+            \<CR>// END WIP  \|         
+    iabbr wip // WIP      \|
+            \<CR>//          \|
+            \<CR>//         \\|/
+            \<CR>//          v
+endfunction
+
+function! FT_vhdl()
+    set tabstop=2
+    set shiftwidth=2
+    set expandtab
+    "setlocal omnifunc=syntaxcomplete#Complete
+    imap <buffer> <C-e>c case  is<CR>when <+state1+> =><CR><+action1+><CR>when <+state2+> =><CR><+action2+><CR>when others => null;<CR>end case;<Esc>6k$2hi
+    imap <buffer> <C-e>e <Esc>bdwientity <Esc>pa is<CR>end entity ;<Esc>POport (<CR>);<Esc>O
+    imap <buffer> <C-e>a <Esc>b"zdwiarchitecture <Esc>pa of <Esc>mz?entity<CR>wyw`zpa is<CR>begin<CR>end architecture ;<Esc>"zPO
+    imap <buffer> <C-e>p <Esc>bywA : process ()<CR>begin<CR>end process ;<Esc>PO<+process body+><Esc>?)<CR>i
+    imap <buffer> <C-e>F <Esc>bdiw function <C-R>"  (<CR>)<CR> return <++ret++> is<CR>begin<CR>end <C-R>";<Esc>5kA
+    imap <buffer> <C-e>g <Esc>bdwipackage <Esc>pa is<CR><BS>end package ;<Esc>PO    
+    imap <buffer> <C-e>i if  then<CR><+do_something+>;<CR>elsif <+condition2+> then<CR><+do_something_else+>;<CR>else<CR><+do_something_else+>;<CR>end if;<Esc>6k$4hi
+    imap <buffer> <C-e>P <Esc>bywA : process(CLK)<CR>begin<CR>if rising_edge(CLK) then<CR>if RST = '1' then<CR><+reset_registers+>;<CR>else<CR><+do_sth+>;<CR>end if;<CR>end if;<CR>end process <Esc>pA;<Esc>5k$18hi
+    imap <buffer> ,, <= 
+    imap <buffer> .. => 
+    imap <buffer> I: I : in 
+    imap <buffer> O: O : out 
+    nnoremap ,vmod i<C-R>=expand("%:t:r")<CR><Esc>bdiw:-1read $HOME/vimfiles/code_templates/vhdl_module.vhd<CR>:%s/module_name_/<C-R>"/g<CR>:%s/_date_/<C-R>=strftime("%d\\/%m\\/%y")<CR>/g<CR>1G/entity<CR>
+    "nnoremap ,vprc :-1read $HOME/vimfiles/code_templates/vhdl_procedure_clocked.vhd<CR>4jO
+    "nnoremap ,vpr :-1read $HOME/vimfiles/code_templates/vhdl_procedure.vhd<CR>2jO
+    iabbr dt downto
+    iabbr sig signal
+    iabbr gen generate
+    iabbr ot others
+    iabbr sl std_logic
+    iabbr slv std_logic_vector
+    iabbr uns unsigned
+    iabbr toi to_integer
+    iabbr tos to_signed
+    iabbr tou to_unsigned
+    iabbr com component
+    iabbr ent entity
+    iabbr arc architecture
+    iabbr ewip --          ^
+            \<CR>--         /\|\
+            \<CR>--          \|
+            \<CR>-- END WIP  \|         
+    iabbr wip -- WIP      \|
+            \<CR>--          \|
+            \<CR>--         \\|/
+            \<CR>--          v
+endfunction
+
+function! FT_ucf()
+    set tabstop=2
+    set shiftwidth=2
+    set expandtab
+    nmap <silent> ;c :.s/^./#&/g<CR>:noh<CR>
+    iabbr ewip #-          ^
+            \<CR>#-         /\|\
+            \<CR>#-          \|
+            \<CR>#- END WIP  \|         
+    iabbr wip #- WIP      \|
+            \<CR>#-          \|
+            \<CR>#-         \\|/
+            \<CR>#-          v
+endfunction
