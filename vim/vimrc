@@ -2,7 +2,11 @@
 " set nocompatible
 let mapleader = ","
 syntax on
-set wildmenu
+if v:version >= 800
+  set wildmenu
+  set ssop-=options " don't store global or local values in a session
+  set ssop-=folds " don't store folds
+endif
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -10,8 +14,6 @@ set hlsearch
 set nowrap
 set number 
 set ignorecase
-set ssop-=options " don't store global or local values in a session
-set ssop-=folds " don't store folds
 filetype plugin on
 filetype indent on
 
@@ -40,7 +42,9 @@ if has("win32")
   set background=dark
   colorscheme lucius
 endif
-set guifont=Courier\ New:h10
+"set guifont=Courier\ New:h10
+"Use Monospace for CITRIX remote sessions
+set guifont=Monospace\ 10
 set go-=T
 set go-=m
 
