@@ -27,17 +27,26 @@ set statusline+=%h%m%r%y                                  " File flags (help, mo
 set statusline+=%=                                        " Left/right separator
 set statusline+=%c,%l/%L                                  " Column, line and total number of lines
 
-" Pathogen activation
-"execute pathogen#infect()
-" Syntastic CFG
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+"vim-plug
+call plug#begin('~/vimfiles/vim-plug')
 
-"let g:syntastic_always_populate_loc_list  = 1
-"let g:syntastic_auto_loc_list             = 1
-"let g:syntastic_check_on_open             = 1
-"let g:syntastic_check_on_wq               = 0
+Plug 'scrooloose/nerdcommenter'
+Plug 'https://github.com/vim-syntastic/syntastic.git'
+"Plug 'https://github.com/suoto/vim-hdl.git'
+Plug 'https://github.com/vim-scripts/VIP.git'
+" Initialize plugin system
+call plug#end()
+
+" Syntastic CFG
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list  = 1
+let g:syntastic_auto_loc_list             = 1
+let g:syntastic_check_on_open             = 1
+let g:syntastic_check_on_wq               = 0
+
 
 " GUI and graphical stuff
 if &term =~ "xterm"
@@ -58,10 +67,12 @@ colorscheme desert
 if has("win32")
   set background=dark
   colorscheme lucius
+  set guifont=Courier\ New:h10
+else
+  "set guifont=Courier\ New:h10
+  "Use Monospace for CITRIX remote sessions
+  set guifont=Monospace\ 10
 endif
-"set guifont=Courier\ New:h10
-"Use Monospace for CITRIX remote sessions
-set guifont=Monospace\ 10
 set go-=T
 set go-=m
 
