@@ -28,15 +28,21 @@ use ieee.math_real.all;
 
 entity module_name_ is
   generic (
-
+    G_GENERIC_0   : integer := 0
   );
   port (
     -- Clocks and Reset
+    i_clk         : in    std_logic;
+    i_rst         : in    std_logic;
+        
     -- Signals
+    i_signal      : in    std_logic;
+    io_signal     : inout std_logic;
+    o_signal      : out   std_logic
   );
 end module_name_;
 
-architecture implementation of module_name_  is
+architecture rtl of module_name_  is
   ------------------------------------------------------------------------------------------ 
   --  Constants 
   ------------------------------------------------------------------------------------------ 
@@ -50,4 +56,4 @@ architecture implementation of module_name_  is
   ------------------------------------------------------------------------------------------ 
 
 begin
-end architecture implementation;
+end architecture rtl;
