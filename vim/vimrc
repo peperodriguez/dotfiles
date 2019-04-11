@@ -1,6 +1,8 @@
 " General configuration
 " set nocompatible
 set langmenu=en_US.UTF-8
+set ff=unix
+set fileformats=unix,dos
 language messages en_US.UTF-8
 let mapleader = ","
 syntax on
@@ -32,7 +34,7 @@ call plug#begin('~/vimfiles/vim-plug')
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'https://github.com/vim-syntastic/syntastic.git'
-"Plug 'https://github.com/suoto/vim-hdl.git'
+Plug 'https://github.com/suoto/vim-hdl.git'
 Plug 'https://github.com/vim-scripts/VIP.git'
 " Initialize plugin system
 call plug#end()
@@ -66,7 +68,7 @@ endif
 colorscheme desert
 if has("win32")
   set background=dark
-  colorscheme lucius
+  "colorscheme lucius
   set guifont=Courier\ New:h10
 else
   "set guifont=Courier\ New:h10
