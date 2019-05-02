@@ -33,21 +33,21 @@ set statusline+=%c,%l/%L                                  " Column, line and tot
 call plug#begin('~/vimfiles/vim-plug')
 
 Plug 'scrooloose/nerdcommenter'
-Plug 'https://github.com/vim-syntastic/syntastic.git'
-Plug 'https://github.com/suoto/vim-hdl.git'
+"Plug 'https://github.com/vim-syntastic/syntastic.git'
+"Plug 'https://github.com/suoto/vim-hdl.git'
 Plug 'https://github.com/vim-scripts/VIP.git'
 " Initialize plugin system
 call plug#end()
 
 " Syntastic CFG
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list  = 1
-let g:syntastic_auto_loc_list             = 1
-let g:syntastic_check_on_open             = 1
-let g:syntastic_check_on_wq               = 0
+"let g:syntastic_always_populate_loc_list  = 1
+"let g:syntastic_auto_loc_list             = 1
+"let g:syntastic_check_on_open             = 0
+"let g:syntastic_check_on_wq               = 0
 
 
 " GUI and graphical stuff
@@ -135,10 +135,11 @@ function! FT_vhdl()
     imap <buffer> <C-e>a <Esc>b"zdwiarchitecture <Esc>pa of <Esc>mz?entity<CR>wyw`zpa is<CR>begin<CR>end architecture ;<Esc>"zPO
     imap <buffer> <C-e>p <Esc>bywA : process ()<CR>begin<CR>end process ;<Esc>PO<+process body+><Esc>?)<CR>i
     imap <buffer> <C-e>F <Esc>bdiw function <C-R>"  (<CR>)<CR> return <++ret++> is<CR>begin<CR>end <C-R>";<Esc>5kA
-    imap <buffer> <C-e>g <Esc>bdwipackage <Esc>pa is<CR><BS>end package ;<Esc>PO    
+    imap <buffer> <C-e>k <Esc>bdwipackage <Esc>pa is<CR><BS>end package ;<Esc>PO    
     imap <buffer> <C-e>i if  then<CR><+do_something+>;<CR>elsif <+condition2+> then<CR><+do_something_else+>;<CR>else<CR><+do_something_else+>;<CR>end if;<Esc>6k$4hi
     imap <buffer> <C-e>P <Esc>bywA : process(CLK)<CR>begin<CR>if rising_edge(CLK) then<CR>if RST = '1' then<CR><+reset_registers+>;<CR>else<CR><+do_sth+>;<CR>end if;<CR>end if;<CR>end process <Esc>pA;<Esc>5k$18hi
-    imap <buffer> <C-e>E <Esc>bywA : process(i_clk)<CR>begin<CR>if rising_edge(i_clk) then<CR><+do_sth+>;<CR>if i_rst = '1' then<CR><+reset_registers+>;<CR>end if;<CR>end process <Esc>pA;<Esc>3k$18hi
+    imap <buffer> <C-e>E <Esc>bywA : process(i_clk)<CR>begin<CR>if rising_edge(i_clk) then<CR><+do_sth+>;<CR>if i_rst = '1' then<CR><+reset_registers+>;<CR>end if;<CR>end if;<CR>end process <Esc>pA;<Esc>4k$18hi
+    imap <buffer> <C-e>g <Esc>bywA : for k in 0 to <+end+> - 1 generate<CR>begin<CR><+concurrent+>;<CR>end generate <Esc>pA;<Esc>3k$20hi
     imap <buffer> ,, <= 
     imap <buffer> .. => 
     imap <buffer> I: I : in 
