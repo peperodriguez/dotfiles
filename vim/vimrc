@@ -137,6 +137,9 @@ function! FT_sysverilog()
     set tabstop=2
     set shiftwidth=2
     set expandtab
+    set suffixesadd+=.vhd
+    set suffixesadd+=.sv
+    set suffixesadd+=.v
     nnoremap ,vmod i<C-R>=expand("%:t:r")<CR><Esc>bdiw:-1read $HOME/github/dotfiles/vim/vimfiles/code_templates/sv_module.sv<CR>:%s/module_name_/<C-R>"/g<CR>:%s/_date_/<C-R>=strftime("%d\\/%m\\/%y")<CR>/g<CR>1G/module<CR>
     iabbr ewip //          ^
             \<CR>//         /\|\
@@ -153,6 +156,9 @@ function! FT_vhdl()
     set tabstop=2
     set shiftwidth=2
     set expandtab
+    set suffixesadd+=.vhd
+    set suffixesadd+=.sv
+    set suffixesadd+=.v
     "setlocal omnifunc=syntaxcomplete#Complete
     imap <buffer> <C-e>c case  is<CR>when <+state1+> =><CR><+action1+><CR>when <+state2+> =><CR><+action2+><CR>when others => null;<CR>end case;<Esc>6k$2hi
     imap <buffer> <C-e>e <Esc>bdwientity <Esc>pa is<CR>end entity ;<Esc>POport (<CR>);<Esc>O
