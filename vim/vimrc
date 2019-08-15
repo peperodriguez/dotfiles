@@ -1,5 +1,12 @@
 " General configuration
 " set nocompatible
+"
+" IMPORTANT : To work nicely with your dotfiles from github:
+"   - Add these two lines to your .vimr or _vimrc file :
+"     
+"     let $MYVIMRC='<path_to_your_github_vimrc_file>'
+"     source <path_to_your_github_vimrc_file>
+"
 set langmenu=en_US.UTF-8
 set ff=unix
 set fileformats=unix,dos
@@ -36,6 +43,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'https://github.com/vim-syntastic/syntastic.git'
 "Plug 'https://github.com/suoto/vim-hdl.git'
 Plug 'https://github.com/vim-scripts/VIP.git'
+"Plug 'w0rp/ale'
 " Initialize plugin system
 call plug#end()
 
@@ -49,31 +57,47 @@ call plug#end()
 "let g:syntastic_check_on_open             = 0
 "let g:syntastic_check_on_wq               = 0
 
+"ALE CFG
+"let g:ale_sign_column_always = 1
+"let g:ale_sign_error = '>>'
+"let g:ale_sign_warning = '--'
+"let g:ale_linters = {
+      "\ 'vhdl': ['vcom'],
+      "\}
+
 
 " GUI and graphical stuff
-if &term =~ "xterm"
-  " 256 colors
-  let &t_Co = 256
-  " restore screen after quitting
-  let &t_ti = "\<Esc>7\<Esc>[r\<Esc>[?47h"
-  let &t_te = "\<Esc>[?47l\<Esc>8"
-  if has("terminfo")
-    let &t_Sf = "\<Esc>[3%p1%dm"
-    let &t_Sb = "\<Esc>[4%p1%dm"
-  else
-    let &t_Sf = "\<Esc>[3%dm"
-    let &t_Sb = "\<Esc>[4%dm"
-  endif
-endif
-colorscheme desert
+"if &term =~ "xterm"
+  "" 256 colors
+  "let &t_Co = 256
+  "" restore screen after quitting
+  "let &t_ti = "\<Esc>7\<Esc>[r\<Esc>[?47h"
+  "let &t_te = "\<Esc>[?47l\<Esc>8"
+  "if has("terminfo")
+    "let &t_Sf = "\<Esc>[3%p1%dm"
+    "let &t_Sb = "\<Esc>[4%p1%dm"
+  "else
+    "let &t_Sf = "\<Esc>[3%dm"
+    "let &t_Sb = "\<Esc>[4%dm"
+  "endif
+"endif
+"colorscheme desert
 if has("win32")
   set background=dark
   colorscheme lucius
   set guifont=Courier\ New:h10
+  "set guifont=Roboto\ Mono\ Regular:h10
+  "set guifont=Lucida\ Console:h9
 else
+  "set t_Co=256
+  "This is needed in WSL
+  set t_ut=
+  set background=dark
+  colorscheme lucius
   "set guifont=Courier\ New:h10
   "Use Monospace for CITRIX remote sessions
-  set guifont=Monospace\ 10
+  set guifont=Lucida\ Console:h9
+  "set guifont=Monospace\ 10
 endif
 set go-=T
 set go-=m
