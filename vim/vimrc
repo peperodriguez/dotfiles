@@ -83,6 +83,7 @@ call plug#end()
 "endif
 "colorscheme desert
 if has("win32")
+  set path=$PWD\\**
   set background=dark
   colorscheme lucius
   set guifont=Courier\ New:h10
@@ -91,6 +92,7 @@ if has("win32")
 else
   "set t_Co=256
   "This is needed in WSL
+  set path=$PWD/**
   set t_ut=
   set background=dark
   colorscheme lucius
@@ -153,6 +155,9 @@ function! FT_sysverilog()
 endfunction
 
 function! FT_vhdl()
+    filetype plugin indent on
+    "Avoid alignment to parenthesis
+    let g:vhdl_indent_genportmap = 0
     set tabstop=2
     set shiftwidth=2
     set expandtab
