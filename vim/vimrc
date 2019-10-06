@@ -122,6 +122,8 @@ function! FT_python()
     set tabstop=4
     set shiftwidth=4
     set expandtab
+    setlocal complete-=i
+    setlocal complete-=t
 "    nmap <silent> ;c :.s/^./#&/g<CR>
     iabbr ewip #           ^
             \<CR>#          /\|\
