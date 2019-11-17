@@ -37,6 +37,16 @@ set statusline+=%=                                        " Left/right separator
 set statusline+=%c,%l/%L                                  " Column, line and total number of lines
 
 "vim-plug
+
+"Check first is vim-plug is installed
+"Credit : https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/vimfiles/vim-plug')
 
 Plug 'scrooloose/nerdcommenter'
@@ -44,6 +54,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'https://github.com/suoto/vim-hdl.git'
 Plug 'https://github.com/vim-scripts/VIP.git'
 "Plug 'w0rp/ale'
+Plug 'https://github.com/lifepillar/vim-solarized8'
 " Initialize plugin system
 call plug#end()
 
@@ -95,7 +106,8 @@ else
   set path=$PWD/**
   set t_ut=
   set background=dark
-  colorscheme lucius
+  "colorscheme lucius
+  colorscheme solarized8
   "set guifont=Courier\ New:h10
   "Use Monospace for CITRIX remote sessions
   set guifont=Lucida\ Console:h9
