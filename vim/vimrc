@@ -81,6 +81,15 @@ call plug#end()
     "let &t_Sb = "\<Esc>[4%dm"
   "endif
 "endif
+
+"netrw configs
+" from : https://shapeshed.com/vim-netrw/
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
 "colorscheme desert
 if has("win32")
   set path=$PWD\\**
