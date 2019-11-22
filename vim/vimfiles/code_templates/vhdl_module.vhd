@@ -1,20 +1,15 @@
 -----------------------------------------------------------------
--- --
---* @name module_name_ --
---* @project --
---* @file module_name_.vhd --
---* @author _author_ --
---* @creation_date _date_ --
---* @revision_date  _date_  --
--- --
+-- Name     : module_name_ --
 -----------------------------------------------------------------
 -- Description:
 --
---* @description 
+-- 
+-- Author   : _author_ --
+-- Created  : _date_ --
 --------------------------------------------------------------
 --
 -- Changelog:
---* @change _date_ _author_ => First version
+-- - _date_ _author_ => First version
 --
 
 library IEEE;
