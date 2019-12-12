@@ -49,16 +49,18 @@ if !has("win32")
   endif
 endif
 
-call plug#begin('~/vimfiles/vim-plug')
+if !has("compatible")
+  call plug#begin('~/vimfiles/vim-plug')
 
-Plug 'scrooloose/nerdcommenter'
-"Plug 'https://github.com/vim-syntastic/syntastic.git'
-"Plug 'https://github.com/suoto/vim-hdl.git'
-Plug 'https://github.com/vim-scripts/VIP.git'
-"Plug 'w0rp/ale'
-Plug 'https://github.com/lifepillar/vim-solarized8'
-" Initialize plugin system
-call plug#end()
+  Plug 'scrooloose/nerdcommenter'
+  "Plug 'https://github.com/vim-syntastic/syntastic.git'
+  "Plug 'https://github.com/suoto/vim-hdl.git'
+  Plug 'https://github.com/vim-scripts/VIP.git'
+  "Plug 'w0rp/ale'
+  Plug 'https://github.com/lifepillar/vim-solarized8'
+  " Initialize plugin system
+  call plug#end()
+endif
 
 " Syntastic CFG
 "set statusline+=%#warningmsg#
@@ -176,7 +178,10 @@ function! FT_sysverilog()
             \<CR>//          \|
             \<CR>//         \\|/
             \<CR>//          v
+    imap <buffer> ,, <= 
     iabbr ac always_comb
+    iabbr af always_ff
+    iabbr lo logic
 endfunction
 
 function! FT_vhdl()
