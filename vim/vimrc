@@ -41,6 +41,7 @@ function! FT_load_plugins()
 endfunction
 
 function! FT_python()
+    call FT_spc_cfg()
     set tabstop=4
     set shiftwidth=4
     set expandtab
@@ -87,6 +88,7 @@ function! FT_sysverilog()
 endfunction
 
 function! FT_vhdl()
+    call FT_spc_cfg()
     filetype plugin indent on
     "Avoid alignment to parenthesis
     let g:vhdl_indent_genportmap = 0
@@ -228,8 +230,8 @@ function! FT_colorsch_cfg()
     set path=$PWD/**
     set t_ut=
     set background=dark
-    colorscheme lucius
-    "colorscheme solarized8
+    "colorscheme lucius
+    colorscheme solarized8
     "set guifont=Courier\ New:h10
     "Use Monospace for CITRIX remote sessions
     "set guifont=Lucida\ Console
@@ -252,7 +254,6 @@ function! FT_general_settings()
   set ff=unix
   set fileformats=unix,dos
   language messages en_US.UTF-8
-  let mapleader = ","
   syntax on
   if v:version >= 800
     set wildmenu
@@ -281,6 +282,9 @@ endfunction
 "-----------------------------------------------------------------------------
 " Initialization
 "-----------------------------------------------------------------------------
+
+let mapleader = ","
+
 call FT_general_settings()
 call FT_ruler_cfg()
 call FT_load_plugins()
